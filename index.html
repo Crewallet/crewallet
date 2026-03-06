@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Crewallet</title>
-
 <meta name="description" content="Crewallet helps cruise ship crew track tips, incentives, contracts and earnings trends.">
-
 <style>
 
 :root{
@@ -65,17 +61,8 @@ justify-content:space-between;
 }
 
 .brand{
-display:flex;
-align-items:center;
-gap:10px;
 font-weight:700;
 font-size:20px;
-}
-
-.brand img{
-width:38px;
-height:38px;
-border-radius:10px;
 }
 
 .nav-links{
@@ -92,15 +79,14 @@ padding:70px 0 40px;
 .hero-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:30px;
+gap:40px;
 align-items:center;
 }
 
-.hero-logo{
-width:70px;
-border-radius:18px;
-margin-bottom:20px;
-box-shadow:var(--shadow);
+.hero p{
+font-size:18px;
+color:var(--muted);
+line-height:1.7;
 }
 
 h1{
@@ -110,10 +96,9 @@ letter-spacing:-0.04em;
 margin:0 0 16px;
 }
 
-.hero p{
-font-size:18px;
-color:var(--muted);
-line-height:1.7;
+.hero-screen{
+border-radius:30px;
+box-shadow:var(--shadow);
 }
 
 .buttons{
@@ -144,49 +129,6 @@ background:var(--card);
 border:1px solid var(--line);
 border-radius:var(--radius);
 box-shadow:var(--shadow);
-}
-
-.mock{
-padding:20px;
-}
-
-.mock-total{
-padding:16px;
-border-radius:20px;
-background:linear-gradient(135deg,#e8f0ff,#e0fbf5);
-margin-bottom:12px;
-}
-
-.mock-total small{
-color:var(--muted);
-}
-
-.mock-total strong{
-display:block;
-font-size:28px;
-margin-top:6px;
-}
-
-.mini-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.mini{
-background:white;
-border:1px solid var(--line);
-padding:14px;
-border-radius:16px;
-}
-
-.mini small{
-color:var(--muted);
-display:block;
-}
-
-.mini strong{
-font-size:18px;
 }
 
 section{
@@ -267,183 +209,104 @@ grid-template-columns:1fr 1fr;
 }
 
 </style>
-
 </head>
-
 <body>
-
 <nav class="nav">
 <div class="container nav-inner">
-
 <div class="brand">
-<img src="logo.png">
-<span>Crewallet</span>
+Crewallet
 </div>
-
 <div class="nav-links">
 <a href="#features">Features</a>
 <a href="#screens">Screens</a>
 <a href="privacy.html">Privacy</a>
 <a href="support.html">Support</a>
 </div>
-
 </div>
 </nav>
-
 <main class="container">
-
 <section class="hero">
-
 <div class="hero-grid">
-
 <div>
-
-<img src="logo.png" class="hero-logo">
-
 <h1>Track your real earnings at sea</h1>
-
 <p>
 Crewallet helps cruise ship crew track tips, incentives, contracts and pay periods in one clean app.
 Understand your real contract performance with trends, dashboards and reports.
 </p>
-
 <div class="buttons">
 <a class="button primary" href="#screens">View screenshots</a>
 <a class="button secondary" href="privacy.html">Privacy policy</a>
 </div>
-
 </div>
-
-<div class="card">
-
-<div class="mock">
-
-<div class="mock-total">
-<small>Total earned this contract</small>
-<strong>4.814 US$</strong>
-<span>Tips 4.556 • Incentives 258</span>
+<div>
+<img src="screenshotdetail-home.jpg" class="hero-screen" alt="Crewallet Home Screen">
 </div>
-
-<div class="mini-grid">
-
-<div class="mini">
-<small>Current pay period</small>
-<strong>4.556 US$</strong>
 </div>
-
-<div class="mini">
-<small>Best pay period</small>
-<strong>4.556 US$</strong>
-</div>
-
-<div class="mini">
-<small>Avg / day</small>
-<strong>162 US$</strong>
-</div>
-
-<div class="mini">
-<small>Incentives</small>
-<strong>258 US$</strong>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
-
 <section id="features">
-
 <h2 class="section-title">Everything organized by contract</h2>
-
 <p class="section-sub">
 Crewallet is designed around real cruise ship life: daily tips, monthly incentives,
 separate contracts, pay periods and performance summaries.
 </p>
-
 <div class="features">
-
 <div class="card feature">
 <h3>Track daily tips</h3>
 <p>
 Log tips day by day and review income inside every pay period.
 </p>
 </div>
-
 <div class="card feature">
 <h3>Add incentives</h3>
 <p>
 Track commissions and monthly bonuses separately from daily tips.
 </p>
 </div>
-
 <div class="card feature">
 <h3>Understand trends</h3>
 <p>
 Visualize contract performance with charts and monthly comparisons.
 </p>
 </div>
-
 </div>
-
 </section>
-
 <section id="screens">
-
 <h2 class="section-title">App screenshots</h2>
-
 <div class="screens">
-
 <div class="card screen">
 <div class="screen-title">Home</div>
-<img src="screenshot-home.jpg">
+<img src="screenshot-home.jpg" alt="Crewallet Home">
 </div>
-
 <div class="card screen">
 <div class="screen-title">Tips</div>
-<img src="screenshot-tips.jpg">
+<img src="screenshot-tips.jpg" alt="Crewallet Tips">
 </div>
-
 <div class="card screen">
 <div class="screen-title">Incentives</div>
-<img src="screenshot-incentives.jpg">
+<img src="screenshot-incentives.jpg" alt="Crewallet Incentives">
 </div>
-
 <div class="card screen">
 <div class="screen-title">Contracts</div>
-<img src="screenshot-contracts.jpg">
+<img src="screenshot-contracts.jpg" alt="Crewallet Contracts">
 </div>
-
 </div>
-
 </section>
-
 <section class="cta card">
-
 <h2>Built for real crew life</h2>
-
 <p>
 Track every contract clearly, separate tips from incentives and keep your earnings history organized.
 </p>
-
 <div class="buttons">
-<a class="button primary" href="mailto:davideprofeta@gmail.com">Contact support</a>
+<a class="button primary" href="mailto:crewallet.app@gmail.com">Contact support</a>
 <a class="button secondary" href="privacy.html">Privacy policy</a>
 </div>
-
 </section>
-
 </main>
-
 <footer class="footer">
 <div class="container">
 © 2026 Crewallet
 </div>
 </footer>
-
 </body>
 </html>
+
