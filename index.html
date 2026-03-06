@@ -1,57 +1,678 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Crewallet Privacy Policy</title>
-<style>
-body{
-font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-max-width:700px;
-margin:40px auto;
-padding:20px;
-line-height:1.6;
-color:#222;
-}
-h1{font-size:32px;}
-h2{margin-top:30px;}
-</style>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crewallet</title>
+  <meta name="description" content="Crewallet helps cruise ship crew track tips, incentives, contracts, and earnings trends." />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: rgba(255,255,255,0.78);
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: rgba(15, 23, 42, 0.08);
+      --accent: #0f766e;
+      --accent-2: #2563eb;
+      --shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      --radius: 24px;
+      --max: 1120px;
+    }
 
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(15,118,110,0.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      background: rgba(245,247,251,0.72);
+      border-bottom: 1px solid var(--line);
+      z-index: 20;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 20px;
+    }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.65);
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(40px, 7vw, 68px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 640px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.8);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(18px);
+    }
+
+    .mock {
+      border-radius: 26px;
+      background: linear-gradient(180deg, #ffffff, #eef4ff);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .mock-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .mock-title {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .total-card {
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(15,118,110,0.12));
+      border: 1px solid rgba(37,99,235,0.10);
+      margin-bottom: 14px;
+    }
+
+    .total-label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .total-value {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .total-sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .mini-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .mini-value {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-title {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0 0 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.7;
+      margin: 0 0 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .icon-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+    .icon-teal { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+    .icon-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .showcase-card {
+      min-height: 280px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .showcase-top {
+      padding: 20px 20px 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .showcase-body {
+      padding: 16px 20px 22px;
+    }
+
+    .bars {
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      height: 160px;
+      margin-top: 18px;
+    }
+
+    .bar-group {
+      flex: 1;
+      display: flex;
+      gap: 4px;
+      align-items: end;
+      justify-content: center;
+    }
+
+    .bar {
+      width: 14px;
+      border-radius: 10px 10px 4px 4px;
+    }
+
+    .bar-tips {
+      background: #3b82f6;
+    }
+
+    .bar-inc {
+      background: #8b5cf6;
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .privacy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .cta {
+      margin: 26px 0 52px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(15,118,110,0.12));
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .cta h2 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      letter-spacing: -0.04em;
+    }
+
+    .cta p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 720px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 48px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .cards,
+      .showcase,
+      .privacy {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 44px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .total-value {
+        font-size: 28px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .cta h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<h1>Crewallet Privacy Policy</h1>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-badge">C</div>
+        <span>Crewallet</span>
+      </div>
 
-<p>Last updated: March 2026</p>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#support">Support</a>
+      </div>
+    </div>
+  </nav>
 
-<h2>Overview</h2>
-<p>Crewallet is designed to help cruise ship crew members track earnings such as tips and incentives during their contracts.</p>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Built for cruise ship crew members</div>
+          <h1>Track your real earnings at sea.</h1>
+          <p>
+            Crewallet helps crew members track tips, incentives, contracts, and pay periods in one clean app.
+            No accounts. No tracking. Just a better way to understand what you earn during every contract.
+          </p>
 
-<h2>No Data Collection</h2>
-<p>Crewallet does not collect, store, or transmit any personal data.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#features">Explore features</a>
+            <a class="button button-secondary" href="#privacy">Privacy policy</a>
+          </div>
+        </div>
 
-<h2>Local Storage Only</h2>
-<p>All data entered into the app is stored locally on the user’s device. This includes:</p>
+        <div class="hero-card">
+          <div class="mock">
+            <div class="mock-top">
+              <span class="mock-title">Home</span>
+              <span>Contract dashboard</span>
+            </div>
 
-<ul>
-<li>Contracts</li>
-<li>Tips entries</li>
-<li>Incentives</li>
-<li>Pay periods</li>
-<li>User preferences</li>
-</ul>
+            <div class="total-card">
+              <div class="total-label">Total earned this contract</div>
+              <div class="total-value">€18,420</div>
+              <div class="total-sub">Tips €17,120 • Incentives €1,300</div>
+            </div>
 
-<p>No data is sent to external servers.</p>
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="mini-label">Current pay period</div>
+                <div class="mini-value">€2,860</div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-label">Best month</div>
+                <div class="mini-value">€4,240</div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-label">Avg / day</div>
+                <div class="mini-value">€122</div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-label">Incentives</div>
+                <div class="mini-value">€1,300</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>No Tracking</h2>
-<p>Crewallet does not use analytics, tracking systems, advertising SDKs, or third-party data collection services.</p>
+    <section id="features">
+      <h2 class="section-title">Everything in one place</h2>
+      <p class="section-sub">
+        Crewallet is designed around how crew members actually work: contract by contract, pay period by pay period,
+        with daily tips and monthly incentives tracked separately.
+      </p>
 
-<h2>Data Control</h2>
-<p>Users have full control over their data. Data can be exported using the in-app backup feature.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="icon icon-blue">₮</div>
+          <h3>Track daily tips</h3>
+          <p>
+            Log earnings day by day, review pay periods, and keep your income history organized for every contract.
+          </p>
+        </div>
 
-<h2>Contact</h2>
-<p>For questions or support please contact:</p>
+        <div class="card">
+          <div class="icon icon-purple">★</div>
+          <h3>Add incentives</h3>
+          <p>
+            Save monthly performance bonuses and commissions separately, without mixing them into your daily tips.
+          </p>
+        </div>
 
-<p><b>davideprofeta@gmail.com</b></p>
+        <div class="card">
+          <div class="icon icon-teal">↗</div>
+          <h3>See real trends</h3>
+          <p>
+            Compare monthly tips and incentives visually, understand contract performance, and export reports when needed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Built like a finance app</h2>
+      <p class="section-sub">
+        Clean dashboards, clear summaries, and visual insights that make your contract performance easy to understand at a glance.
+      </p>
+
+      <div class="showcase">
+        <div class="showcase-card">
+          <div class="showcase-top">Monthly trends</div>
+          <div class="showcase-body">
+            <h3 style="margin:0;font-size:24px;letter-spacing:-0.03em;">Tips vs Incentives</h3>
+            <p style="margin:8px 0 0;color:var(--muted);line-height:1.7;">
+              Compare two income streams with side-by-side monthly bars.
+            </p>
+
+            <div class="bars">
+              <div class="bar-group">
+                <div class="bar bar-tips" style="height:92px;"></div>
+                <div class="bar bar-inc" style="height:26px;"></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar bar-tips" style="height:120px;"></div>
+                <div class="bar bar-inc" style="height:34px;"></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar bar-tips" style="height:82px;"></div>
+                <div class="bar bar-inc" style="height:12px;"></div>
+              </div>
+              <div class="bar-group">
+                <div class="bar bar-tips" style="height:138px;"></div>
+                <div class="bar bar-inc" style="height:46px;"></div>
+              </div>
+            </div>
+
+            <div class="bar-labels">
+              <span>Jun</span>
+              <span>Jul</span>
+              <span>Aug</span>
+              <span>Sep</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-top">Contract reports</div>
+          <div class="showcase-body">
+            <h3 style="margin:0;font-size:24px;letter-spacing:-0.03em;">Professional summaries</h3>
+            <p style="margin:8px 0 18px;color:var(--muted);line-height:1.7;">
+              Export contract reports as PDF and keep backups of your data directly from the app.
+            </p>
+
+            <div class="mini-card" style="margin-bottom:12px;">
+              <div class="mini-label">Total contract</div>
+              <div class="mini-value">€18,420</div>
+            </div>
+
+            <div class="mini-card" style="margin-bottom:12px;">
+              <div class="mini-label">Tips</div>
+              <div class="mini-value">€17,120</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Incentives</div>
+              <div class="mini-value">€1,300</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <h2 class="section-title">Private by design</h2>
+      <p class="section-sub">
+        Crewallet is intentionally simple: your data stays with you.
+      </p>
+
+      <div class="privacy">
+        <div class="card">
+          <h3>Local-first data</h3>
+          <p>
+            Contracts, tips, incentives, and pay periods are stored locally on your device.
+            There are no accounts and no remote database.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>No tracking</h3>
+          <p>
+            No analytics, no ads, no tracking SDKs, and no hidden data collection.
+            Backups are exported manually by the user.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="support">
+      <h2>Crewallet is built for real crew life.</h2>
+      <p>
+        Track earnings clearly, separate tips from incentives, and keep every contract organized in one place.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="mailto:support@crewtips.app">Contact support</a>
+        <a class="button button-secondary" href="#privacy">Read privacy policy</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <span>© 2026 Crewallet</span>
+      <span>davideprofeta@gmail.com</span>
+    </div>
+  </footer>
 
 </body>
 </html>
