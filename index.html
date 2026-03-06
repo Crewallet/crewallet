@@ -1,602 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Crewallet</title>
-  <meta name="description" content="Crewallet helps cruise ship crew track tips, incentives, contracts, and earnings trends." />
-  <style>
-    :root {
-      --bg: #f6f7fb;
-      --card: rgba(255,255,255,0.82);
-      --text: #111827;
-      --muted: #6b7280;
-      --line: rgba(17, 24, 39, 0.08);
-      --blue: #2563eb;
-      --teal: #0f766e;
-      --purple: #7c3aed;
-      --shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-      --radius: 26px;
-      --max: 1140px;
-    }
 
-    * { box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    html { scroll-behavior: smooth; }
+<title>Crewallet</title>
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(37,99,235,0.10), transparent 30%),
-        radial-gradient(circle at top right, rgba(15,118,110,0.10), transparent 25%),
-        var(--bg);
-    }
+<meta name="description" content="Crewallet helps cruise ship crew track tips, incentives, contracts and earnings trends.">
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+<style>
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
+:root{
+--bg:#f6f7fb;
+--card:rgba(255,255,255,0.9);
+--text:#111827;
+--muted:#6b7280;
+--line:rgba(17,24,39,0.08);
+--blue:#2563eb;
+--teal:#0f766e;
+--shadow:0 12px 40px rgba(15,23,42,0.08);
+--radius:26px;
+--max:1100px;
+}
 
-    .container {
-      width: 100%;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+*{box-sizing:border-box}
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(246,247,251,0.72);
-      border-bottom: 1px solid var(--line);
-    }
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+background:var(--bg);
+color:var(--text);
+}
 
-    .nav-inner {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.container{
+max-width:var(--max);
+margin:auto;
+padding:0 20px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
+img{
+max-width:100%;
+display:block;
+}
 
-    .brand-badge {
-      width: 38px;
-      height: 38px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      background: linear-gradient(135deg, var(--blue), var(--teal));
-      box-shadow: var(--shadow);
-      font-weight: 900;
-    }
+a{
+text-decoration:none;
+color:inherit;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 600;
-    }
+.nav{
+position:sticky;
+top:0;
+background:rgba(246,247,251,0.8);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--line);
+}
 
-    .hero {
-      padding: 72px 0 48px;
-    }
+.nav-inner{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 28px;
-      align-items: center;
-    }
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:700;
+font-size:20px;
+}
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.72);
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
+.brand img{
+width:38px;
+height:38px;
+border-radius:10px;
+}
 
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-    }
+.nav-links{
+display:flex;
+gap:24px;
+font-size:14px;
+color:var(--muted);
+}
 
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.7;
-      max-width: 640px;
-    }
+.hero{
+padding:70px 0 40px;
+}
 
-    .actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
+.hero-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+align-items:center;
+}
 
-    .button {
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
-      transition: 0.2s ease;
-      border: 1px solid transparent;
-    }
+.hero-logo{
+width:70px;
+border-radius:18px;
+margin-bottom:20px;
+box-shadow:var(--shadow);
+}
 
-    .button:hover {
-      transform: translateY(-1px);
-    }
+h1{
+font-size:60px;
+line-height:1;
+letter-spacing:-0.04em;
+margin:0 0 16px;
+}
 
-    .button-primary {
-      color: #fff;
-      background: linear-gradient(135deg, var(--blue), var(--teal));
-      box-shadow: var(--shadow);
-    }
+.hero p{
+font-size:18px;
+color:var(--muted);
+line-height:1.7;
+}
 
-    .button-secondary {
-      background: rgba(255,255,255,0.85);
-      border-color: var(--line);
-    }
+.buttons{
+margin-top:26px;
+display:flex;
+gap:12px;
+}
 
-    .hero-card,
-    .card,
-    .shot-card,
-    .cta {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
+.button{
+padding:12px 18px;
+border-radius:14px;
+font-weight:600;
+font-size:15px;
+}
 
-    .hero-card {
-      padding: 20px;
-    }
+.primary{
+background:linear-gradient(135deg,var(--blue),var(--teal));
+color:white;
+}
 
-    .mock {
-      border-radius: 24px;
-      background: linear-gradient(180deg, #ffffff, #eef3ff);
-      border: 1px solid rgba(17,24,39,0.06);
-      padding: 18px;
-    }
+.secondary{
+border:1px solid var(--line);
+background:white;
+}
 
-    .mock-label {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
+.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+}
 
-    .mock-total {
-      padding: 18px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(15,118,110,0.12));
-      border: 1px solid rgba(37,99,235,0.10);
-      margin-bottom: 14px;
-    }
+.mock{
+padding:20px;
+}
 
-    .mock-total small {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+.mock-total{
+padding:16px;
+border-radius:20px;
+background:linear-gradient(135deg,#e8f0ff,#e0fbf5);
+margin-bottom:12px;
+}
 
-    .mock-total strong {
-      display: block;
-      font-size: 34px;
-      letter-spacing: -0.04em;
-      margin-bottom: 8px;
-    }
+.mock-total small{
+color:var(--muted);
+}
 
-    .mock-total span {
-      color: var(--muted);
-      font-size: 13px;
-    }
+.mock-total strong{
+display:block;
+font-size:28px;
+margin-top:6px;
+}
 
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+.mini-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
 
-    .mini {
-      padding: 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.90);
-      border: 1px solid var(--line);
-    }
+.mini{
+background:white;
+border:1px solid var(--line);
+padding:14px;
+border-radius:16px;
+}
 
-    .mini small {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+.mini small{
+color:var(--muted);
+display:block;
+}
 
-    .mini strong {
-      font-size: 20px;
-      letter-spacing: -0.03em;
-    }
+.mini strong{
+font-size:18px;
+}
 
-    section {
-      padding: 28px 0;
-    }
+section{
+padding:40px 0;
+}
 
-    .section-title {
-      margin: 0 0 10px;
-      font-size: 34px;
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
+.section-title{
+font-size:32px;
+margin-bottom:10px;
+letter-spacing:-0.03em;
+}
 
-    .section-sub {
-      margin: 0 0 24px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 740px;
-    }
+.section-sub{
+color:var(--muted);
+max-width:700px;
+line-height:1.7;
+margin-bottom:26px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+.features{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
 
-    .card {
-      padding: 22px;
-    }
+.feature{
+padding:20px;
+}
 
-    .icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
+.screens{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+}
 
-    .icon-blue { background: linear-gradient(135deg, #2563eb, #60a5fa); }
-    .icon-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
-    .icon-teal { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+.screen{
+padding:12px;
+}
 
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      letter-spacing: -0.03em;
-    }
+.screen-title{
+font-size:13px;
+color:var(--muted);
+margin-bottom:8px;
+}
 
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
-    }
+.screen img{
+border-radius:20px;
+}
 
-    .shots {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
+.cta{
+padding:30px;
+background:linear-gradient(135deg,#e8f0ff,#e0fbf5);
+margin-top:20px;
+}
 
-    .shot-card {
-      overflow: hidden;
-      padding: 14px;
-    }
+.footer{
+border-top:1px solid var(--line);
+padding:24px 0;
+color:var(--muted);
+font-size:14px;
+margin-top:30px;
+}
 
-    .shot-head {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+@media(max-width:900px){
 
-    .shot-frame {
-      border-radius: 26px;
-      overflow: hidden;
-      border: 1px solid rgba(17,24,39,0.06);
-      background: #fff;
-    }
+.hero-grid{
+grid-template-columns:1fr;
+}
 
-    .privacy-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
+.features{
+grid-template-columns:1fr;
+}
 
-    .cta {
-      padding: 30px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(15,118,110,0.12));
-      border-color: rgba(37,99,235,0.10);
-      margin-top: 16px;
-    }
+.screens{
+grid-template-columns:1fr 1fr;
+}
 
-    .cta h2 {
-      margin: 0 0 10px;
-      font-size: 36px;
-      letter-spacing: -0.04em;
-    }
+}
 
-    .cta p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 760px;
-    }
+</style>
 
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 24px 0 44px;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 18px;
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 1080px) {
-      .shots {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 960px) {
-      .hero-grid,
-      .cards,
-      .privacy-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 44px;
-      }
-
-      .section-title {
-        font-size: 28px;
-      }
-
-      .mini-grid,
-      .shots {
-        grid-template-columns: 1fr;
-      }
-
-      .cta h2 {
-        font-size: 28px;
-      }
-    }
-  </style>
 </head>
+
 <body>
 
-  <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="brand-badge">C</div>
-        <span>Crewallet</span>
-      </div>
+<nav class="nav">
+<div class="container nav-inner">
 
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#screens">Screens</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="support.html">Support</a>
-      </div>
-    </div>
-  </nav>
+<div class="brand">
+<img src="logo.png">
+<span>Crewallet</span>
+</div>
 
-  <main class="container">
+<div class="nav-links">
+<a href="#features">Features</a>
+<a href="#screens">Screens</a>
+<a href="privacy.html">Privacy</a>
+<a href="support.html">Support</a>
+</div>
 
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Built for cruise ship crew members</div>
-          <h1>Track your real earnings at sea.</h1>
-          <p>
-            Crewallet helps crew members track tips, incentives, contracts, and pay periods in one clean app.
-            Understand every contract clearly with dashboards, trends, backup, and PDF reports.
-          </p>
+</div>
+</nav>
 
-          <div class="actions">
-            <a class="button button-primary" href="#screens">View screenshots</a>
-            <a class="button button-secondary" href="privacy.html">Privacy policy</a>
-          </div>
-        </div>
+<main class="container">
 
-        <div class="hero-card">
-          <div class="mock">
-            <div class="mock-label">Home dashboard</div>
+<section class="hero">
 
-            <div class="mock-total">
-              <small>Total earned this contract</small>
-              <strong>4.814 US$</strong>
-              <span>Tips 4.556 US$ • Incentives 258 US$</span>
-            </div>
+<div class="hero-grid">
 
-            <div class="mini-grid">
-              <div class="mini">
-                <small>Current pay period</small>
-                <strong>4.556 US$</strong>
-              </div>
-              <div class="mini">
-                <small>Best pay period</small>
-                <strong>4.556 US$</strong>
-              </div>
-              <div class="mini">
-                <small>Avg / day</small>
-                <strong>162,71 US$</strong>
-              </div>
-              <div class="mini">
-                <small>Incentives</small>
-                <strong>258 US$</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div>
 
-    <section id="features">
-      <h2 class="section-title">Everything organized by contract</h2>
-      <p class="section-sub">
-        Crewallet is built around how crew members actually work: daily tips, monthly incentives,
-        separate contracts, pay periods, and clean performance summaries.
-      </p>
+<img src="logo.png" class="hero-logo">
 
-      <div class="cards">
-        <div class="card">
-          <div class="icon icon-blue">₮</div>
-          <h3>Track daily tips</h3>
-          <p>
-            Log tips day by day, review pay periods, and keep your income history clear for every contract.
-          </p>
-        </div>
+<h1>Track your real earnings at sea</h1>
 
-        <div class="card">
-          <div class="icon icon-purple">★</div>
-          <h3>Add incentives</h3>
-          <p>
-            Save monthly commissions and bonuses separately, without distorting your daily tip performance.
-          </p>
-        </div>
+<p>
+Crewallet helps cruise ship crew track tips, incentives, contracts and pay periods in one clean app.
+Understand your real contract performance with trends, dashboards and reports.
+</p>
 
-        <div class="card">
-          <div class="icon icon-teal">↗</div>
-          <h3>Understand trends</h3>
-          <p>
-            Compare tips and incentives visually, monitor contract performance, and export PDF summaries when needed.
-          </p>
-        </div>
-      </div>
-    </section>
+<div class="buttons">
+<a class="button primary" href="#screens">View screenshots</a>
+<a class="button secondary" href="privacy.html">Privacy policy</a>
+</div>
 
-    <section id="screens">
-      <h2 class="section-title">Real screenshots from the app</h2>
-      <p class="section-sub">
-        A simple, local-first finance experience designed specifically for cruise crew life.
-      </p>
+</div>
 
-      <div class="shots">
-        <div class="shot-card">
-          <div class="shot-head">Home</div>
-          <div class="shot-frame">
-            <img src="screenshot-home.jpg" alt="Crewallet Home screen" />
-          </div>
-        </div>
+<div class="card">
 
-        <div class="shot-card">
-          <div class="shot-head">Tips</div>
-          <div class="shot-frame">
-            <img src="screenshot-tips.jpg" alt="Crewallet Tips screen" />
-          </div>
-        </div>
+<div class="mock">
 
-        <div class="shot-card">
-          <div class="shot-head">Incentives</div>
-          <div class="shot-frame">
-            <img src="screenshot-incentives.jpg" alt="Crewallet Incentives screen" />
-          </div>
-        </div>
+<div class="mock-total">
+<small>Total earned this contract</small>
+<strong>4.814 US$</strong>
+<span>Tips 4.556 • Incentives 258</span>
+</div>
 
-        <div class="shot-card">
-          <div class="shot-head">Contracts</div>
-          <div class="shot-frame">
-            <img src="screenshot-contracts.jpg" alt="Crewallet Contracts screen" />
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="mini-grid">
 
-    <section>
-      <h2 class="section-title">Private by design</h2>
-      <p class="section-sub">
-        Your financial data should stay yours. Crewallet is intentionally simple and local-first.
-      </p>
+<div class="mini">
+<small>Current pay period</small>
+<strong>4.556 US$</strong>
+</div>
 
-      <div class="privacy-grid">
-        <div class="card">
-          <h3>Stored on your device</h3>
-          <p>
-            Contracts, tips, incentives, and pay periods are stored locally on your device. No account is required.
-          </p>
-        </div>
+<div class="mini">
+<small>Best pay period</small>
+<strong>4.556 US$</strong>
+</div>
 
-        <div class="card">
-          <h3>No tracking</h3>
-          <p>
-            No analytics, no ads, no third-party tracking, and no hidden data collection. Backups are exported manually by the user.
-          </p>
-        </div>
-      </div>
-    </section>
+<div class="mini">
+<small>Avg / day</small>
+<strong>162 US$</strong>
+</div>
 
-    <section class="cta">
-      <h2>Built for real crew life.</h2>
-      <p>
-        Track every contract clearly, separate tips from incentives, and keep your income history organized in one place.
-      </p>
+<div class="mini">
+<small>Incentives</small>
+<strong>258 US$</strong>
+</div>
 
-      <div class="actions">
-        <a class="button button-primary" href="mailto:crewallet.app@gmail.com">Contact support</a>
-        <a class="button button-secondary" href="privacy.html">Read privacy policy</a>
-      </div>
-    </section>
+</div>
 
-  </main>
+</div>
 
-  <footer class="footer">
-    <div class="container footer-row">
-      <span>© 2026 Crewallet</span>
-      <span>davideprofeta@gmail.com</span>
-    </div>
-  </footer>
+</div>
+
+</div>
+
+</section>
+
+<section id="features">
+
+<h2 class="section-title">Everything organized by contract</h2>
+
+<p class="section-sub">
+Crewallet is designed around real cruise ship life: daily tips, monthly incentives,
+separate contracts, pay periods and performance summaries.
+</p>
+
+<div class="features">
+
+<div class="card feature">
+<h3>Track daily tips</h3>
+<p>
+Log tips day by day and review income inside every pay period.
+</p>
+</div>
+
+<div class="card feature">
+<h3>Add incentives</h3>
+<p>
+Track commissions and monthly bonuses separately from daily tips.
+</p>
+</div>
+
+<div class="card feature">
+<h3>Understand trends</h3>
+<p>
+Visualize contract performance with charts and monthly comparisons.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="screens">
+
+<h2 class="section-title">App screenshots</h2>
+
+<div class="screens">
+
+<div class="card screen">
+<div class="screen-title">Home</div>
+<img src="screenshot-home.jpg">
+</div>
+
+<div class="card screen">
+<div class="screen-title">Tips</div>
+<img src="screenshot-tips.jpg">
+</div>
+
+<div class="card screen">
+<div class="screen-title">Incentives</div>
+<img src="screenshot-incentives.jpg">
+</div>
+
+<div class="card screen">
+<div class="screen-title">Contracts</div>
+<img src="screenshot-contracts.jpg">
+</div>
+
+</div>
+
+</section>
+
+<section class="cta card">
+
+<h2>Built for real crew life</h2>
+
+<p>
+Track every contract clearly, separate tips from incentives and keep your earnings history organized.
+</p>
+
+<div class="buttons">
+<a class="button primary" href="mailto:davideprofeta@gmail.com">Contact support</a>
+<a class="button secondary" href="privacy.html">Privacy policy</a>
+</div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="container">
+© 2026 Crewallet
+</div>
+</footer>
 
 </body>
 </html>
