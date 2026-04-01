@@ -1,312 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crewallet</title>
-<meta name="description" content="Crewallet helps cruise ship crew track tips, incentives, contracts and earnings trends.">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crewallet</title>
+  <meta
+    name="description"
+    content="Crewallet helps onboard crew track contracts, tips, incentives, expenses, pay periods and past history in one clean app."
+  />
+  <style>
+    :root {
+      --bg: #f5f8fb;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #5b6472;
+      --border: #dbe4ee;
+      --accent: #1f6feb;
+      --accent-soft: #eaf2ff;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius: 20px;
+      --max: 1120px;
+    }
 
-:root{
---bg:#f6f7fb;
---card:rgba(255,255,255,0.9);
---text:#111827;
---muted:#6b7280;
---line:rgba(17,24,39,0.08);
---blue:#2563eb;
---teal:#0f766e;
---shadow:0 12px 40px rgba(15,23,42,0.08);
---radius:26px;
---max:1100px;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-*{box-sizing:border-box}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
-background:var(--bg);
-color:var(--text);
-}
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f7fbff 0%, #f3f6fb 100%);
+      line-height: 1.55;
+    }
 
-.container{
-max-width:var(--max);
-margin:auto;
-padding:0 20px;
-}
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-img{
-max-width:100%;
-display:block;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-a{
-text-decoration:none;
-color:inherit;
-}
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.nav{
-position:sticky;
-top:0;
-background:rgba(246,247,251,0.8);
-backdrop-filter:blur(12px);
-border-bottom:1px solid var(--line);
-}
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(247, 251, 255, 0.88);
+      border-bottom: 1px solid rgba(219, 228, 238, 0.9);
+    }
 
-.nav-inner{
-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
 
-.brand{
-font-weight:700;
-font-size:20px;
-}
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
 
-.nav-links{
-display:flex;
-gap:24px;
-font-size:14px;
-color:var(--muted);
-}
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-.hero{
-padding:70px 0 40px;
-}
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+    }
 
-.hero-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-align-items:center;
-}
+    .hero {
+      padding: 72px 0 40px;
+    }
 
-.hero p{
-font-size:18px;
-color:var(--muted);
-line-height:1.7;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
 
-h1{
-font-size:60px;
-line-height:1;
-letter-spacing:-0.04em;
-margin:0 0 16px;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
 
-.hero-screen{
-border-radius:30px;
-box-shadow:var(--shadow);
-}
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
 
-.buttons{
-margin-top:26px;
-display:flex;
-gap:12px;
-}
+    .hero-copy {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 28px;
+    }
 
-.button{
-padding:12px 18px;
-border-radius:14px;
-font-weight:600;
-font-size:15px;
-}
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
 
-.primary{
-background:linear-gradient(135deg,var(--blue),var(--teal));
-color:white;
-}
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
 
-.secondary{
-border:1px solid var(--line);
-background:white;
-}
+    .button.primary {
+      background: var(--text);
+      color: white;
+      box-shadow: var(--shadow);
+    }
 
-.card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:var(--radius);
-box-shadow:var(--shadow);
-}
+    .button.secondary {
+      background: white;
+      color: var(--text);
+      border-color: var(--border);
+    }
 
-section{
-padding:40px 0;
-}
+    .button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
 
-.section-title{
-font-size:32px;
-margin-bottom:10px;
-letter-spacing:-0.03em;
-}
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
 
-.section-sub{
-color:var(--muted);
-max-width:700px;
-line-height:1.7;
-margin-bottom:26px;
-}
+    .hero-points li {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-weight: 600;
+    }
 
-.features{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
 
-.feature{
-padding:20px;
-}
+    .hero-card img {
+      width: 100%;
+      display: block;
+      border-radius: 22px;
+    }
 
-.screens{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
-}
+    section {
+      padding: 32px 0;
+    }
 
-.screen{
-padding:12px;
-}
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.04em;
+    }
 
-.screen-title{
-font-size:13px;
-color:var(--muted);
-margin-bottom:8px;
-}
+    .section-copy {
+      margin: 0 0 24px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
 
-.screen img{
-border-radius:20px;
-}
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
 
-.cta{
-padding:30px;
-background:linear-gradient(135deg,#e8f0ff,#e0fbf5);
-margin-top:20px;
-}
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
 
-.footer{
-border-top:1px solid var(--line);
-padding:24px 0;
-color:var(--muted);
-font-size:14px;
-margin-top:30px;
-}
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
 
-@media(max-width:900px){
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+    }
 
-.hero-grid{
-grid-template-columns:1fr;
-}
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
 
-.features{
-grid-template-columns:1fr;
-}
+    .screen-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
 
-.screens{
-grid-template-columns:1fr 1fr;
-}
+    .screen-card img {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
 
-}
+    .screen-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
 
-</style>
+    .screen-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 40px 0 56px;
+      color: var(--muted);
+    }
+
+    .footer-box {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .features-grid,
+      .screens-grid,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-<nav class="nav">
-<div class="container nav-inner">
-<div class="brand">
-Crewallet
-</div>
-<div class="nav-links">
-<a href="#features">Features</a>
-<a href="#screens">Screens</a>
-<a href="privacy.html">Privacy</a>
-<a href="support.html">Support</a>
-</div>
-</div>
-</nav>
-<main class="container">
-<section class="hero">
-<div class="hero-grid">
-<div>
-<h1>Track your real earnings at sea</h1>
-<p>
-Crewallet helps cruise ship crew track tips, incentives, contracts and pay periods in one clean app.
-Understand your real contract performance with trends, dashboards and reports.
-</p>
-<div class="buttons">
-<a class="button primary" href="#screens">View screenshots</a>
-<a class="button secondary" href="privacy.html">Privacy policy</a>
-</div>
-</div>
-<div>
-<img src="screenshotdetail-home.jpg" class="hero-screen" alt="Crewallet Home Screen">
-</div>
-</div>
-</section>
-<section id="features">
-<h2 class="section-title">Everything organized by contract</h2>
-<p class="section-sub">
-Crewallet is designed around real cruise ship life: daily tips, monthly incentives,
-separate contracts, pay periods and performance summaries.
-</p>
-<div class="features">
-<div class="card feature">
-<h3>Track daily tips</h3>
-<p>
-Log tips day by day and review income inside every pay period.
-</p>
-</div>
-<div class="card feature">
-<h3>Add incentives</h3>
-<p>
-Track commissions and monthly bonuses separately from daily tips.
-</p>
-</div>
-<div class="card feature">
-<h3>Understand trends</h3>
-<p>
-Visualize contract performance with charts and monthly comparisons.
-</p>
-</div>
-</div>
-</section>
-<section id="screens">
-<h2 class="section-title">App screenshots</h2>
-<div class="screens">
-<div class="card screen">
-<div class="screen-title">Home</div>
-<img src="screenshot-home.jpg" alt="Crewallet Home">
-</div>
-<div class="card screen">
-<div class="screen-title">Tips</div>
-<img src="screenshot-tips.jpg" alt="Crewallet Tips">
-</div>
-<div class="card screen">
-<div class="screen-title">Incentives</div>
-<img src="screenshot-incentives.jpg" alt="Crewallet Incentives">
-</div>
-<div class="card screen">
-<div class="screen-title">Contracts</div>
-<img src="screenshot-contracts.jpg" alt="Crewallet Contracts">
-</div>
-</div>
-</section>
-<section class="cta card">
-<h2>Built for real crew life</h2>
-<p>
-Track every contract clearly, separate tips from incentives and keep your earnings history organized.
-</p>
-<div class="buttons">
-<a class="button primary" href="mailto:crewallet.app@gmail.com">Contact support</a>
-<a class="button secondary" href="privacy.html">Privacy policy</a>
-</div>
-</section>
-</main>
-<footer class="footer">
-<div class="container">
-© 2026 Crewallet
-</div>
-</footer>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Crewallet</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#screens">Screens</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Built for onboard crew</div>
+          <h1>Keep contracts, earnings and onboard spending organized.</h1>
+          <p class="hero-copy">
+            Crewallet helps crew members manage contracts, daily tips, incentives,
+            expenses, pay periods and past contract history in one clean app.
+            Review trends over time, export PDF reports and keep your data safe with backup and restore.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#screens">View screenshots</a>
+            <a class="button secondary" href="privacy.html">Privacy policy</a>
+          </div>
+
+          <ul class="hero-points">
+            <li>Track daily tips with clarity</li>
+            <li>Understand each pay period</li>
+            <li>Keep expenses under control</li>
+            <li>Review past contracts easily</li>
+          </ul>
+        </div>
+
+        <div class="hero-card">
+          <img src="assets/home.png" alt="Crewallet home screen preview" />
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">Everything organized in one place</h2>
+        <p class="section-copy">
+          Crewallet is designed for real crew life. It keeps current contracts and historical data readable,
+          practical and easy to review over time.
+        </p>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <h3>Contracts and pay periods</h3>
+            <p>Organize every contract separately, monitor progress and understand what each pay period is really worth.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Tips and incentives</h3>
+            <p>Track daily tips and additional incentives clearly without mixing different earning sources.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Expenses</h3>
+            <p>Log onboard spending by category and compare expenses against your real earnings.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Trends and history</h3>
+            <p>Review performance over time with monthly trends, summaries and long-term contract history.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>PDF export</h3>
+            <p>Generate clean contract reports you can keep, share or archive outside the app.</p>
+          </article>
+
+          <article class="feature-card">
+            <h3>Backup and restore</h3>
+            <p>Export your data manually and import it later to move between installs more safely.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens">
+      <div class="container">
+        <h2 class="section-title">App screenshots</h2>
+        <p class="section-copy">
+          A quick look at the main areas of Crewallet.
+        </p>
+
+        <div class="screens-grid">
+          <article class="screen-card">
+            <img src="assets/home.png" alt="Crewallet home screen" />
+            <h3>Home</h3>
+            <p>See contract totals, net earnings and current pay period performance at a glance.</p>
+          </article>
+
+          <article class="screen-card">
+            <img src="assets/tips.png" alt="Crewallet tips screen" />
+            <h3>Tips</h3>
+            <p>Track daily tips by pay period and understand how your logged days affect results.</p>
+          </article>
+
+          <article class="screen-card">
+            <img src="assets/incentives.png" alt="Crewallet incentives screen" />
+            <h3>Incentives</h3>
+            <p>Keep bonuses and other extra earnings separate from daily tips.</p>
+          </article>
+
+          <article class="screen-card">
+            <img src="assets/expenses.png" alt="Crewallet expenses screen" />
+            <h3>Expenses</h3>
+            <p>Review spending by contract, month or pay period and see how it impacts earnings.</p>
+          </article>
+
+          <article class="screen-card">
+            <img src="assets/contracts.png" alt="Crewallet contracts screen" />
+            <h3>Contracts</h3>
+            <p>Manage active and archived contracts and keep your history easier to review.</p>
+          </article>
+
+          <article class="screen-card">
+            <img src="assets/trends.png" alt="Crewallet trends screen" />
+            <h3>Trends</h3>
+            <p>Understand monthly performance, projections and long-term contract progress.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container summary">
+        <article class="summary-card">
+          <h3>No account. No tracking.</h3>
+          <p>
+            Crewallet is built to stay simple. Your app data stays local on your device unless you manually export it.
+          </p>
+        </article>
+
+        <article class="summary-card">
+          <h3>Built for practical crew use</h3>
+          <p>
+            The goal is not banking, investing or crypto. Crewallet is focused on contract earnings, onboard spending and financial clarity.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-box">
+      <div>© 2026 Crewallet</div>
+      <div>
+        <a href="support.html">Support</a>
+        &nbsp;•&nbsp;
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
-
